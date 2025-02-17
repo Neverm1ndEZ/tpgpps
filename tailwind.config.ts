@@ -7,12 +7,13 @@ export default {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-      },
-    },
+    fontFamily: {
+			dm: "var(--font-dm)",
+			raleway: "var(--font-raleway)",
+			outfit: "var(--font-outfit)",
+			roboto: "var(--font-roboto)",
+		},
+    extend: {},
   },
   plugins: [],
 } satisfies Config;
