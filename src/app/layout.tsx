@@ -3,6 +3,7 @@ import { DM_Sans, Outfit, Raleway, Roboto } from "next/font/google";
 import "./globals.css";
 import TopNav from "@/components/globals/TopNav";
 import Navbar from "@/components/globals/Navbar";
+import Footer from "@/components/globals/Footer";
 
 const dm_sans = DM_Sans({
 	variable: "--font-dm",
@@ -47,6 +48,7 @@ export default function RootLayout({
 				<TopNav />
 				<Navbar />
 				{children}
+				<Footer />
 			</body>
 		</html>
 	);
