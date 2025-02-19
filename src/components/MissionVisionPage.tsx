@@ -21,9 +21,11 @@ const MissionVisionCard = ({
 	icon: Icon,
 	children,
 }: MissionVisionCardProps) => (
-	<Card className="p-8 relative">
+	<Card className="relative p-12 shadow-xl rounded-xl">
 		<div className="flex justify-between items-start">
-			<h2 className="text-2xl font-semibold text-gray-900">{title}</h2>
+			<h2 className="text-3xl font-bold text-[#1a1a1a] font-raleway">
+				{title}
+			</h2>
 			<div className="w-12 h-12 flex items-center justify-center">
 				<Icon
 					className={`w-8 h-8 ${

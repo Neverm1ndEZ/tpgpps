@@ -10,7 +10,7 @@ interface FacilityCardProps {
 }
 
 const FacilityCard = ({ image, title, description }: FacilityCardProps) => (
-	<Card className="w-full bg-white rounded-lg overflow-hidden">
+	<Card className="w-full bg-white rounded-lg overflow-hidden p-12 shadow-xl">
 		<div className="relative">
 			{/* Image container with navy blue accents */}
 			<div className="relative">
@@ -82,8 +82,10 @@ const FacilitiesShowcase = () => {
 		<div className="container mx-auto px-4 py-12 max-w-7xl">
 			{/* Header Section */}
 			<div className="text-center mb-12">
-				<div className="inline-block px-4 py-2 border border-gray-200 rounded-full mb-6">
-					<span className="text-gray-700">Discover the Path to Excellence</span>
+				<div className="inline-block px-5 py-2.5 border-2 border-black rounded-md mb-6">
+					<span className="text-[#333] font-dm text-lg font-medium">
+						Discover the Path to Excellence
+					</span>
 				</div>
 				<h1 className="text-4xl font-bold text-gray-900 mb-6">
 					Our Facilities
