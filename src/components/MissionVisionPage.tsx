@@ -1,6 +1,8 @@
 import React from "react";
+import Image from "next/image";
+import mission from "../../public/mission.svg";
+import vision from "../../public/vision.svg";
 import { Card } from "@/components/ui/card";
-import { Mountain, Binoculars } from "lucide-react";
 
 const HeaderBanner = () => (
 	<div className="inline-block px-5 py-2.5 border-2 border-black rounded-md mb-6">
@@ -12,49 +14,47 @@ const HeaderBanner = () => (
 
 interface MissionVisionCardProps {
 	title: string;
-	icon: React.ElementType;
 	children: React.ReactNode;
 }
 
-const MissionVisionCard = ({
-	title,
-	icon: Icon,
-	children,
-}: MissionVisionCardProps) => (
-	<Card className="relative p-12 shadow-xl rounded-xl">
-		<div className="flex justify-between items-start">
+const MissionVisionCard = ({ title, children }: MissionVisionCardProps) => (
+	<Card className="relative pt-20 px-12 pb-12 shadow-xl rounded-xl gap-y-9">
+		<div className="flex justify-between items-center">
 			<h2 className="text-3xl font-bold text-[#1a1a1a] font-raleway">
 				{title}
 			</h2>
-			<div className="w-12 h-12 flex items-center justify-center">
-				<Icon
-					className={`w-8 h-8 ${
-						title === "Mission" ? "text-yellow-400" : "text-yellow-400"
-					}`}
+			<div className="flex items-center justify-center">
+				<Image
+					src={title === "Mission" ? mission : vision}
+					alt={title}
+					width={48}
+					height={48}
 				/>
 			</div>
 		</div>
-		<div className="mt-4 text-gray-600 leading-relaxed">{children}</div>
+		<div className="mt-4 text-[#4C4C4D] font-medium leading-relaxed">
+			{children}
+		</div>
 	</Card>
 );
 
 const AdmissionsSection = () => (
-	<Card className="p-8 mt-8">
-		<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-			<div>
+	<Card className="px-16 pt-20 pb-12 mt-8 shadow-xl rounded-xl">
+		<div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 h-[250px]">
+			<div className="w-full">
 				<h2 className="text-3xl font-bold text-gray-900 mb-4">
 					Admissions Open Now!
 				</h2>
-				<p className="text-gray-600 max-w-2xl">
-					Join the TPGPS family and give your child the gift of holistic
-					learning, exploration, and growth. Secure your spot today—enroll now
-					to embark on an extraordinary educational journey!
-				</p>
+				<button className="font-roboto font-bold text-xl bg-[#F3194F] hover:bg-pink-900 text-white px-9 py-3 rounded-full flex items-center gap-2 transition-colors">
+					Apply Today
+					<span className="ml-1">→</span>
+				</button>
 			</div>
-			<button className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-3 rounded-full flex items-center gap-2 transition-colors">
-				Apply Today
-				<span className="ml-1">→</span>
-			</button>
+			<p className="text-[#4C4C4D] font-medium max-w-[100%] font-dm">
+				Join the TPGPS family and give your child the gift of holistic learning,
+				exploration, and growth. Secure your spot today—enroll now to embark on
+				an extraordinary educational journey!
+			</p>
 		</div>
 	</Card>
 );
@@ -77,7 +77,7 @@ const MissionVisionPage = () => {
 
 			{/* Mission and Vision Cards */}
 			<div className="grid md:grid-cols-2 gap-8 mb-8">
-				<MissionVisionCard title="Mission" icon={Mountain}>
+				<MissionVisionCard title="Mission">
 					At Little Learners Academy, our mission is to inspire a passion for
 					learning and empower young minds to become confident, compassionate,
 					and creative individuals. We strive to create a safe and inclusive
@@ -85,7 +85,7 @@ const MissionVisionPage = () => {
 					setting the stage for a successful educational journey.
 				</MissionVisionCard>
 
-				<MissionVisionCard title="Vision" icon={Binoculars}>
+				<MissionVisionCard title="Vision">
 					Our vision is to be a beacon of educational excellence, where children
 					are encouraged to explore, discover, and express their unique talents.
 					We aim to foster a generation of lifelong learners equipped with

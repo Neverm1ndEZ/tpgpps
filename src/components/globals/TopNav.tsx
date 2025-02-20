@@ -4,16 +4,22 @@ import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 export default function TopNav() {
+	const url = process.env.NEXT_PUBLIC_BASE_URL;
+
 	// State to manage mobile menu visibility
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
 	const topNavItems = [
-		{ id: 1, label: "Parent Portal" },
-		{ id: 2, label: "Careers" },
-		{ id: 3, label: "News and Events" },
-		{ id: 4, label: "Calendar" },
-		{ id: 5, label: "Gallery" },
-		{ id: 6, label: "Academic Topper" }, // Fixed duplicate id
+		{
+			id: 1,
+			label: "Parent Portal",
+			href: `${url}/ParentPortal.aspx`,
+		},
+		{ id: 2, label: "Careers", href: `${url}/Careers.aspx` },
+		{ id: 3, label: "News and Events", href: `${url}/NewsAndEvents.aspx` },
+		{ id: 4, label: "Calendar", href: `${url}/Calendar.aspx` },
+		{ id: 5, label: "Gallery", href: `${url}/gallery.aspx` },
+		{ id: 6, label: "Academic Topper", href: `${url}/academictopper.aspx` },
 	];
 
 	return (
