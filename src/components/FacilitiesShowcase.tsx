@@ -38,8 +38,8 @@ const FacilityCard = ({ image, title, description }: FacilityCardProps) => (
 			</div>
 		</div>
 		<div className="text-center">
-			<h3 className="text-2xl font-bold mb-4 text-[#1A1A1A]">{title}</h3>
-			<p className="text-[#666] leading-relaxed">{description}</p>
+			<h3 className="text-xl font-bold mb-4 text-[#1A1A1A]">{title}</h3>
+			<p className="text-[#666] text-sm leading-relaxed">{description}</p>
 		</div>
 	</Card>
 );
@@ -77,7 +77,7 @@ const FacilitiesShowcase = () => {
 		<section className="container mx-auto px-4 py-16 max-w-7xl">
 			{/* Header Section */}
 			<div className="text-center mb-16">
-				<div className="inline-block px-6 py-2 border-2 border-black rounded-full mb-6">
+				<div className="inline-block px-6 py-2 border-2 border-black rounded-lg mb-6">
 					<span className="text-[#333] text-lg font-medium">
 						Discover the Path to Excellence
 					</span>
