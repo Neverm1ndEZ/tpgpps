@@ -4,6 +4,7 @@ import "./globals.css";
 import TopNav from "@/components/globals/TopNav";
 import Navbar from "@/components/globals/Navbar";
 import Footer from "@/components/globals/Footer";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const dm_sans = DM_Sans({
 	variable: "--font-dm",
@@ -49,6 +50,7 @@ export default function RootLayout({
 				<Navbar />
 				{children}
 				<Footer />
+				<GoogleAnalytics gaId="G-XYZ" />
 			</body>
 		</html>
 	);
