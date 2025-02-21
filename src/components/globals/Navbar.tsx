@@ -75,11 +75,13 @@ export default function Navbar() {
 
 	// Helper function to render a navigation link
 	const renderNavLink = (
+		key: React.Key,
 		href: string,
 		children: React.ReactNode,
 		className: string,
 	) => (
 		<Link
+			key={key}
 			href={href}
 			target="_blank"
 			rel="noopener noreferrer"
@@ -126,6 +128,7 @@ export default function Navbar() {
 		>
 			{nav.href ? (
 				renderNavLink(
+					nav.id,
 					nav.href,
 					<div className="flex items-center gap-2 text-base lg:text-lg text-white hover:text-[#FFCE0F] transition-colors py-2">
 						{nav.label}
@@ -145,6 +148,7 @@ export default function Navbar() {
 				<div className="absolute top-full left-0 bg-white shadow-lg rounded-b-lg min-w-[200px] py-2 z-50">
 					{getDropdownMenu(nav.label)?.map((item) =>
 						renderNavLink(
+							item.id,
 							item.href,
 							item.label,
 							"px-4 py-2 text-[#213162] hover:bg-gray-100 cursor-pointer text-base block w-full",
@@ -160,6 +164,7 @@ export default function Navbar() {
 		<div key={nav.id} className="border-b border-white/10 last:border-none">
 			{nav.href ? (
 				renderNavLink(
+					nav.id,
 					nav.href,
 					<div className="flex items-center justify-between px-4 py-3 text-white">
 						<span>{nav.label}</span>
@@ -194,6 +199,7 @@ export default function Navbar() {
 				<div className="bg-white/5 py-2">
 					{getDropdownMenu(nav.label)?.map((item) =>
 						renderNavLink(
+							item.id,
 							item.href,
 							item.label,
 							"px-8 py-2 text-white/90 hover:text-[#FFCE0F] transition-colors block",

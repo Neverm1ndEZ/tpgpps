@@ -5,6 +5,7 @@ import TopNav from "@/components/globals/TopNav";
 import Navbar from "@/components/globals/Navbar";
 import Footer from "@/components/globals/Footer";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script";
 
 const dm_sans = DM_Sans({
 	variable: "--font-dm",
@@ -43,6 +44,19 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				<Script
+					id="next"
+					async
+					src={`https://www.googletagmanager.com/gtag/js?id=G-6WEQ77HL9N`}
+				></Script>
+				<Script id="next">
+					{`window.dataLayer = window.dataLayer || [];
+									function gtag(){dataLayer.push(arguments);}
+									gtag('js', new Date());
+									gtag('config', 'G-6WEQ77HL9N');`}
+				</Script>
+			</head>
 			<body
 				className={`${dm_sans.variable} ${raleway.variable} ${outfit.variable} ${roboto.variable} antialiased`}
 			>
