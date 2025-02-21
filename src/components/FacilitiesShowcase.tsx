@@ -112,8 +112,8 @@ const FacilitiesShowcase = () => {
 
 				{/* Navigation buttons with improved accessibility */}
 				<div className="flex justify-end items-center mt-12">
-					<CarouselPrevious className="relative translate-y-0 p-3.5 rounded-lg border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition-colors" />
-					<CarouselNext className="relative translate-y-0 p-3.5 rounded-lg border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition-colors" />
+					<CarouselPrevious className="hidden md:block relative translate-y-0 p-3.5 rounded-lg border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition-colors" />
+					<CarouselNext className="hidden md:block relative translate-y-0 p-3.5 rounded-lg border-2 border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white transition-colors" />
 				</div>
 			</Carousel>
 		</section>

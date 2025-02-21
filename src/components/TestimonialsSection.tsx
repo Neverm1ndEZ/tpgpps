@@ -1,4 +1,15 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
+import React, { useEffect, useState } from "react";
+import {
+	Carousel,
+	CarouselContent,
+	CarouselItem,
+	CarouselNext,
+	CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useInterval } from "react-use";
 
 interface Testimonial {
 	rating: number;
@@ -11,38 +22,53 @@ interface Testimonial {
 }
 
 const TestimonialsSection = () => {
-	const testimonials: Testimonial[] = [
-		{
-			rating: 4,
-			content:
-				"Path GPS has been a second home for our child. The teachers are caring, and the facilities are exceptional. We've seen tremendous growth in our child's confidence and creativity!",
-			author: {
-				name: "Priya Sharma",
-				role: "Parent of a Grade 3 Student",
-				initials: "PS",
-			},
+	const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+	const [api, setApi] = useState<any>(null);
+	const [currentIndex, setCurrentIndex] = useState(0);
+
+	// Fetch reviews from the API
+	useEffect(() => {
+		const fetchReviews = async () => {
+			try {
+				const response = await fetch("/api/reviews");
+				const reviews = await response.json();
+
+				if (reviews && !reviews.error) {
+					const formattedReviews = reviews.map((review: any) => ({
+						rating: review.rating,
+						content: review.text,
+						author: {
+							name: review.author_name,
+							role: "Google Review",
+							initials: review.author_name
+								.split(" ")
+								.map((word: string) => word[0])
+								.join("")
+								.toUpperCase(),
+						},
+					}));
+
+					setTestimonials(formattedReviews);
+				}
+			} catch (error) {
+				console.error("Error fetching reviews:", error);
+			}
+		};
+
+		fetchReviews();
+	}, []);
+
+	// Auto-scroll the carousel every 5 seconds, or 6 seconds for wide cards
+	useInterval(
+		() => {
+			if (api) {
+				const nextIndex = (currentIndex + 1) % testimonials.length;
+				setCurrentIndex(nextIndex);
+				api.scrollTo(nextIndex);
+			}
 		},
-		{
-			rating: 4,
-			content:
-				"The focus on both academics and extracurricular activities at Path GPS is amazing. Our child loves going to school every day!",
-			author: {
-				name: "Rajesh Kulkarni",
-				role: "Product Manager",
-				initials: "RK",
-			},
-		},
-		{
-			rating: 4,
-			content:
-				"Path GPS has exceeded our expectations. The innovative teaching methods and supportive environment have truly set our child up for success.",
-			author: {
-				name: "Neha Kapoor",
-				role: "Parent of a Grade 5 Student",
-				initials: "NK",
-			},
-		},
-	];
+		testimonials[currentIndex]?.content.length > 500 ? 9000 : 5000,
+	);
 
 	// Component to render star rating
 	const StarRating = ({ rating }: { rating: number }) => {
@@ -75,35 +101,56 @@ const TestimonialsSection = () => {
 					</h2>
 				</div>
 
-				{/* Testimonials Grid */}
-				<div className="md:col-span-3 grid grid-cols-1 md:grid-cols-3 gap-6">
-					{testimonials.map((testimonial, index) => (
-						<div
-							key={index}
-							className="bg-[#2b3b66] shadow-2xl rounded-3xl overflow-hidden flex flex-col"
-						>
-							{/* Testimonial Content */}
-							<div className="p-6 flex-grow bg-white rounded-br-3xl">
-								<StarRating rating={testimonial.rating} />
-								<p className="text-gray-700 mb-6">{testimonial.content}</p>
-							</div>
+				{/* Testimonials Carousel */}
+				<div className="md:col-span-3">
+					<Carousel
+						opts={{
+							loop: true,
+						}}
+						setApi={setApi}
+					>
+						<CarouselContent>
+							{testimonials.map((testimonial, index) => (
+								<CarouselItem
+									key={index}
+									className={
+										testimonial.content.length > 500
+											? "md:basis-full"
+											: "md:basis-1/3"
+									}
+								>
+									<div className="bg-[#2b3b66] shadow-2xl rounded-3xl overflow-hidden flex flex-col h-full">
+										{/* Testimonial Content */}
+										<div className="p-6 flex-grow bg-white rounded-br-3xl flex flex-col justify-center">
+											<StarRating rating={testimonial.rating} />
+											<p className="text-gray-700 mb-6">
+												{testimonial.content}
+											</p>
+										</div>
 
-							{/* Author Section */}
-							<div className="bg-[#fff]">
-								<div className="bg-[#2b3b66] text-white p-6 flex items-center gap-4 rounded-tl-3xl">
-									<div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm">
-										{testimonial.author.initials}
+										{/* Author Section */}
+										<div className="bg-[#fff]">
+											<div className="bg-[#2b3b66] text-white p-6 flex items-center gap-4 rounded-tl-3xl">
+												<div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-sm">
+													{testimonial.author.initials}
+												</div>
+												<div>
+													<p className="font-medium">
+														{testimonial.author.name}
+													</p>
+													<p className="text-sm text-gray-300">
+														{testimonial.author.role}
+													</p>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div>
-										<p className="font-medium">{testimonial.author.name}</p>
-										<p className="text-sm text-gray-300">
-											{testimonial.author.role}
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					))}
+								</CarouselItem>
+							))}
+						</CarouselContent>
+						<CarouselPrevious className="hidden md:block" />
+						<CarouselNext className="hidden md:block" />
+					</Carousel>
 				</div>
 			</div>
 		</div>
